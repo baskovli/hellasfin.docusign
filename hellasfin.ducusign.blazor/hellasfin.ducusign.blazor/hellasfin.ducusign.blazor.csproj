@@ -15,4 +15,8 @@
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.5.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\hellasfin.docusign.dal\hellasfin.docusign.dal.csproj" />
+  </ItemGroup>
+
 </Project>

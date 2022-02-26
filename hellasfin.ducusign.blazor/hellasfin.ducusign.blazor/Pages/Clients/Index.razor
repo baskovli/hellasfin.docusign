@@ -1,0 +1,84 @@
+﻿@page "/clients"
+@using hellasfin.docusign.dal.Models
+
+<h3>Clients</h3>
+
+<Row>
+    <Column ColumnSize="ColumnSize.Is8" Float="Float.Start">
+        <p class="font-weight-normal">
+            Clients
+            <a class="btn btn-outline-info btn-sm" href="/cases/case"><Icon Name="IconName.Add"></Icon></a>
+        </p>
+    </Column>
+</Row>
+
+<DataGrid TItem="ClientModel"
+          @ref="grid"
+          Data="@data"
+          ReadData="@OnReadData"
+          AggregateData="@dataAsyncSummary"
+          TotalItems="total"
+          ShowPager="true"
+          PageSize="20"
+          Filterable="true"
+          Editable="false"
+          Striped="true"
+          Bordered="true"
+          Hoverable="true"
+          Responsive="true"
+          Sortable="false"
+          FilterMethod="DataGridFilterMethod.Contains">
+    <DataGridColumns>
+        <DataGridColumn TItem="ClientModel" Field="@nameof(ClientModel.Id)" Caption="Id" />
+        <DataGridColumn TItem="ClientModel" Field="@nameof(ClientModel.Lname)" Caption="Last name" />
+        <DataGridColumn TItem="ClientModel" Field="@nameof(ClientModel.Fname)" Caption="First name" />
+        <DataGridColumn TItem="ClientModel" Field="@nameof(ClientModel.Company)" Caption="Company" />
+        <DataGridColumn TItem="ClientModel" Field="@nameof(ClientModel.Region)" Caption="Region" />
+        <DataGridColumn TItem="ClientModel" Field="@nameof(ClientModel.Country)" Caption="Country" />
+    </DataGridColumns>
+</DataGrid>
+@if (showSpinner)
+{
+    <SpinnerComp />
+}
+
+@code {
+    private bool showSpinner;
+    int total;
+    private DataGrid<ClientModel> grid;
+    private List<ClientModel> data;
+    private List<ClientModel> dataAsyncSummary;
+
+
+
+    async Task OnReadData(DataGridReadDataEventArgs<ClientModel> e)
+    {
+        var response = new List<ClientModel>()
+        {
+            new ClientModel
+            {
+                Id = 1,
+                Fname = "Tast",
+                Lname = "Testidis",
+                Company = "Abc",
+                Region= "Thessaloniki",
+                Country = "Greece",
+            },
+            new ClientModel
+            {
+                Id = 2,
+                Fname = "Test",
+                Lname = "Testakis",
+                Company = "Dce",
+                Region= "Athens",
+                Country = "Greece",
+            }
+        };
+        data = response;
+        total = response.Count();
+
+        dataAsyncSummary = response;
+
+        StateHasChanged();
+    }
+}
