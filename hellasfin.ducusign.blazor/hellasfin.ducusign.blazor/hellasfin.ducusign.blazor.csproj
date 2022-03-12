@@ -13,6 +13,9 @@
     <PackageReference Include="Blazorise.Components" Version="0.9.5.6" />
     <PackageReference Include="Blazorise.DataGrid" Version="0.9.5.6" />
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.5.6" />
+    <PackageReference Include="DocuSign.Click" Version="1.1.0" />
+    <PackageReference Include="DocuSign.eSign.dll" Version="5.9.0" />
+    <PackageReference Include="DocuSign.Monitor" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

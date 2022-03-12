@@ -1,4 +1,7 @@
 ﻿@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavMan
+@using System.Security.Claims;
 
 <PageTitle>hellasfin.ducusign.blazor</PageTitle>
 
@@ -17,3 +20,17 @@
         </article>
     </main>
 </div>
+
+@code {
+    private ClaimsPrincipal User;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        User = authState.User;
+        if (!User.Identity.IsAuthenticated)
+        {
+            NavMan.NavigateTo("Identity/Account/Login", true);
+        }
+    }
+}
